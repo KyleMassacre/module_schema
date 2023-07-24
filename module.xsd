@@ -1,0 +1,102 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="configuration" type="configurationType"/>
+  <xs:complexType name="moduleType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="version"/>
+        <xs:attribute type="xs:string" name="name"/>
+        <xs:attribute type="xs:string" name="author"/>
+        <xs:attribute type="xs:string" name="type"/>
+        <xs:attribute type="xs:string" name="description"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="keyType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+        <xs:attribute type="xs:string" name="description" use="optional"/>
+        <xs:attribute type="xs:string" name="value" use="optional"/>
+        <xs:attribute type="xs:string" name="options" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="variableType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="tableType" mixed="true">
+    <xs:sequence>
+      <xs:element type="condition_wizardType" name="condition_wizard" minOccurs="0"/>
+      <xs:element type="lookupType" name="lookup" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="name" use="optional"/>
+    <xs:attribute type="xs:string" name="display_columns" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="condition_wizardType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="column"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="lookupType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="key" use="optional"/>
+        <xs:attribute type="xs:string" name="column" use="optional"/>
+        <xs:attribute type="xs:string" name="table" use="optional"/>
+        <xs:attribute type="xs:string" name="display" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="image_uploadType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="folder"/>
+        <xs:attribute type="xs:string" name="image_format"/>
+        <xs:attribute type="xs:string" name="id_column"/>
+        <xs:attribute type="xs:string" name="display_column"/>
+        <xs:attribute type="xs:string" name="table"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="theme_tableType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="user_dataType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="table" use="optional"/>
+        <xs:attribute type="xs:string" name="column" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="requiresType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="name"/>
+        <xs:attribute type="xs:string" name="version"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="configurationType">
+    <xs:sequence>
+      <xs:element type="moduleType" name="module"/>
+      <xs:element type="keyType" name="key" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="variableType" name="variable" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="tableType" name="table" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="image_uploadType" name="image_upload"/>
+      <xs:element type="theme_tableType" name="theme_table" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="user_dataType" name="user_data" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="requiresType" name="requires"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
